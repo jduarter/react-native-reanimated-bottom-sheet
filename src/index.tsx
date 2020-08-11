@@ -577,7 +577,9 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
     console.log('handleTap, ev is: ', { ev })
     if (this.props.onSnapChange && ev.nativeEvent.state === 3) {
       console.log(this)
-      this.props.onSnapChange(this.state.heightOfHeader)
+      console.log(this.state)
+      console.log(this.tapState)
+      this.props.onSnapChange(this.state)
     }
 
     return event([{ nativeEvent: { state: this.tapState } }])
@@ -712,6 +714,7 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
       layout: { height: heightOfHeader },
     },
   }: LayoutChangeEvent) => {
+    console.log('handleLayoutHeader: ', { heightOfHeader })
     this.state.heightOfHeaderAnimated.setValue(heightOfHeader)
     this.setState({ heightOfHeader })
   }
@@ -722,6 +725,7 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
     },
   }: LayoutChangeEvent) =>
     requestAnimationFrame(() => {
+      console.log('HANDLE LAYOUT CONTENT', { height })
       this.height.setValue(height)
     })
 
@@ -730,6 +734,7 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
       layout: { height },
     },
   }: LayoutChangeEvent) => {
+    console.log('HANDLE LAYOUT CONTENT', { height })
     this.state.heightOfContent.setValue(height - this.state.initSnap)
 
     if (this.props.onSnapChange) {
