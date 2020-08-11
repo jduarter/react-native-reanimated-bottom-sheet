@@ -577,7 +577,7 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
     console.log('handleTap, ev is: ', { ev })
     if (this.props.onSnapChange && ev.nativeEvent.state === 3) {
       console.log(this)
-      this.props.onSnapChange(this.snapPoint)
+      this.props.onSnapChange(this.state.heightOfHeader)
     }
 
     return event([{ nativeEvent: { state: this.tapState } }])
