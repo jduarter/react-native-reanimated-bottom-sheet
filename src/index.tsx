@@ -574,11 +574,11 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
   ])
 
   private handleTap = (ev: any) => {
-    console.log('handleTap, ev is: ', { ev })
     if (this.props.onSnapChange && ev.nativeEvent.state === 3) {
-      console.log(this)
-      console.log(this.state)
-      console.log(this.tapState)
+      console.log('handleTap, ev is: ', { ev })
+      //console.log(this)
+      console.log('this.state: ', this.state)
+      console.log('this.tapState:', this.tapState)
       this.props.onSnapChange(this.state)
     }
 
@@ -803,6 +803,17 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
         ].val
     }
 
+    console.log('getDerivedStateFromProps: return: ', {
+      init,
+      propsToNewIndices,
+      heightOfHeaderAnimated:
+        (state && state.heightOfHeaderAnimated) || new Value(0),
+      heightOfContent: (state && state.heightOfContent) || new Value(0),
+      initSnap: sortedPropsSnapPoints[0].val,
+      snapPoints,
+      heightOfHeader: (state && state.heightOfHeader) || 0,
+    })
+
     return {
       init,
       propsToNewIndices,
@@ -841,6 +852,9 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
                 translateY: sub(this.height, this.state.initSnap) as any,
               },
             ],
+          }}
+          onLayout={evv => {
+            console.log('Animated.View evv: ', evv)
           }}
         >
           <PanGestureHandler
