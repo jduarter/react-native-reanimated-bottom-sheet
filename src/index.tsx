@@ -557,26 +557,25 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
     },
   ])
 
-  private handlePan = (ev: any) => {
-    console.log('handlePan, ev is: ', { ev })
-    return event([
-      {
-        nativeEvent: {
-          translationY: this.props.enabledInnerScrolling
-            ? this.dragY
-            : this.dragMasterY,
-          state: this.props.enabledInnerScrolling
-            ? this.panState
-            : this.panMasterState,
-          velocityY: this.props.enabledInnerScrolling
-            ? this.velocity
-            : this.masterVelocity,
-        },
+  private handlePan = event([
+    {
+      nativeEvent: {
+        translationY: this.props.enabledInnerScrolling
+          ? this.dragY
+          : this.dragMasterY,
+        state: this.props.enabledInnerScrolling
+          ? this.panState
+          : this.panMasterState,
+        velocityY: this.props.enabledInnerScrolling
+          ? this.velocity
+          : this.masterVelocity,
       },
-    ])(ev)
-  }
+    },
+  ])
 
-  private handleTap = (ev: any) => {
+  private handleTap = event([
+    { nativeEvent: { state: this.tapState } },
+  ]) /*(ev: any) => {
     if (this.props.onSnapChange && ev.nativeEvent.state === 3) {
       console.log('handleTap, ev is: ', { ev })
       //console.log(this)
@@ -585,8 +584,8 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
       this.props.onSnapChange(this.state)
     }
 
-    return event([{ nativeEvent: { state: this.tapState } }])(ev)
-  }
+    return
+}*/
 
   private withEnhancedLimits(
     val: Animated.Node<number>,
