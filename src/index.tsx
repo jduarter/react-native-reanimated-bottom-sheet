@@ -573,7 +573,7 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
             : this.masterVelocity,
         },
       },
-    ])
+    ])(ev)
   }
 
   private handleTap = (ev: any) => {
@@ -585,7 +585,7 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
       this.props.onSnapChange(this.state)
     }
 
-    return event([{ nativeEvent: { state: this.tapState } }])
+    return event([{ nativeEvent: { state: this.tapState } }])(ev)
   }
 
   private withEnhancedLimits(
