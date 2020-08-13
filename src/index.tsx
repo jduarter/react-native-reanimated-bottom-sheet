@@ -557,21 +557,24 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
     },
   ])
 
-  private handlePan = event([
-    {
-      nativeEvent: {
-        translationY: this.props.enabledInnerScrolling
-          ? this.dragY
-          : this.dragMasterY,
-        state: this.props.enabledInnerScrolling
-          ? this.panState
-          : this.panMasterState,
-        velocityY: this.props.enabledInnerScrolling
-          ? this.velocity
-          : this.masterVelocity,
+  private handlePan = (ev: any) => {
+    console.log('handlePan, ev is: ', { ev })
+    return event([
+      {
+        nativeEvent: {
+          translationY: this.props.enabledInnerScrolling
+            ? this.dragY
+            : this.dragMasterY,
+          state: this.props.enabledInnerScrolling
+            ? this.panState
+            : this.panMasterState,
+          velocityY: this.props.enabledInnerScrolling
+            ? this.velocity
+            : this.masterVelocity,
+        },
       },
-    },
-  ])
+    ])
+  }
 
   private handleTap = (ev: any) => {
     if (this.props.onSnapChange && ev.nativeEvent.state === 3) {
@@ -699,6 +702,11 @@ export default class BottomSheetBehavior extends React.Component<Props, State> {
     if (!this.props.enabledImperativeSnapping) {
       return
     }
+
+    console.log(
+      'SnapTO: ',
+      this.state.snapPoints[this.state.propsToNewIndices[index]]
+    )
 
     this.isManuallySetValue.setValue(1)
     this.manuallySetValue.setValue(
